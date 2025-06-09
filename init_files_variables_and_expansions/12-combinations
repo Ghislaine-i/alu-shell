@@ -1,0 +1,2 @@
+#!/bin/sh
+printf %s\\n $(eval echo {a..z}{a..z})|grep -v oo
