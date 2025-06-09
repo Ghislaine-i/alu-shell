@@ -1,0 +1,20 @@
+#!/bin/bash
+# 17-water_and_stir
+
+# 1. Convert WATER (base 'water') to decimal digits (0-4) then to decimal
+# The 'tr -dC' part handles cases like the '.' in STIR by removing chars not in the base set
+WATER_DEC_DIGITS=$(echo "$WATER" | tr -dC 'water' | tr 'water' '01234')
+DECIMAL_WATER=$(echo "ibase=5;$WATER_DEC_DIGITS" | bc)
+
+# 2. Convert STIR (base 'stir') to decimal digits (0-3) then to decimal
+STIR_DEC_DIGITS=$(echo "$STIR" | tr -dC 'stir' | tr 'stir' '0123')
+DECIMAL_STIR=$(echo "ibase=4;$STIR_DEC_DIGITS" | bc)
+
+# 3. Add the two decimal numbers
+SUM_DECIMAL=$((DECIMAL_WATER + DECIMAL_STIR))
+
+# 4. Convert the sum from decimal to base 8 digits
+RESULT_BASE8_DIGITS=$(echo "obase=8;$SUM_DECIMAL" | bc)
+
+# 5. Map the base 8 digits back to 'bestchol' characters (b=0, e=1, s=2, t=3, c=4, h=5, o=6, l=7)
+echo "$RESULT_BASE8_DIGITS" | tr '01234567' 'bestchol'
