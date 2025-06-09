@@ -1,2 +1,3 @@
 #!/bin/bash
+#!/bin/bash
 echo $(( $(echo "$WATER" | tr -dC 'water' | tr 'water' '01234' | bc <<< "ibase=5; $(cat)") + $(echo "$STIR" | tr -dC 'stir' | tr 'stir' '0123' | bc <<< "ibase=4; $(cat)") )) | tr '01234567' 'bestchol'
